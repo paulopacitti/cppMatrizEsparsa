@@ -6,5 +6,5 @@ MatrizEsparsa:: MatrizEsparsa(int l, int c, int v)
     this->nColunas = c;
     this->valorComum = v;
 
-    this->matriz = new list()
+    this->linhas
 }

@@ -15,7 +15,7 @@ class Lista
         int getTamanho();
 
         bool existe(No* n);
-        No* operator[](int i) throw();
+        No* getByIndex(int i) throw();
 
 };
 #endif // ELEMENTO

@@ -7,7 +7,8 @@ class MatrizEsparsa
         int nLinhas;
         int nColunas;
         int valorComum;
-        Linha* l;
+
+        Linha* linhas;
 
     public:
         MatrizEsparsa(int l, int c, int v) const;

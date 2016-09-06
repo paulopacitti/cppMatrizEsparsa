@@ -22,11 +22,11 @@ Lista::~Lista()
 void Lista::incluir(No* n)
 {
     bool achou = false;
-    chave = 0;
+    int chave = 0;
     No* aux = this->primeiro;
     No* aux2;
 
-    if(this[0]->compareTo(n) == -1)
+    if(this->getByIndex(0)->compareTo(n) == -1)
     {
         aux = this->primeiro;
         this->primeiro = n;
@@ -36,9 +36,9 @@ void Lista::incluir(No* n)
     }
     else
     {
-        if(this[tamanho-1]->compareTo(n) == -1)
+        if(this->getByIndex(tamanho-1)->compareTo(n) == -1)
         {
-            this[tamanho -1]->setProx(n);
+            this->getByIndex(tamanho-1)->setProx(n);
             tamanho++;
             return;
         }
@@ -47,7 +47,7 @@ void Lista::incluir(No* n)
             while(!achou)
             {
                 if(aux->compareTo(n) == -1)
-                    achouIndex = true;
+                    achou = true;
                 else
                 {
                     chave = aux->getChave();
@@ -57,7 +57,7 @@ void Lista::incluir(No* n)
 
             aux2 = aux->getProx();
             aux->setProx(n);
-            aux->getProx()->setProx();
+            aux->getProx()->setProx(aux2);
         }
     }
 }
@@ -69,11 +69,11 @@ void Lista::excluir(No* n)
     {
         for(int i=0; i < tamanho; i++)
         {
-            if(this[i]->compareTo(n) == 0)
+            if(this->getByIndex(i)->compareTo(n) == 0)
             {
-                aux = this[i]->getProx();
-                ~this[i]();
-                this[i-1]->setProx(aux);
+                aux = this->getByIndex(i)->getProx();
+                this->getByIndex(i)->~No();
+                this->getByIndex(i-1)->setProx(aux);
             }
         }
     }
@@ -83,14 +83,14 @@ bool Lista::existe(No* n)
 {
     for(int i=0; i < tamanho; i++)
     {
-        if(this[i]->compareTo(n) == 0)
+        if(this->getByIndex(i)->compareTo(n) == 0)
             return true;
     }
 
     return false;
 }
 
-No* Lista::operator[](int i)
+No* Lista::getByIndex(int i) throw()
 {
     No* aux;
     aux = this->primeiro;

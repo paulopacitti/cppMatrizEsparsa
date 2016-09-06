@@ -1,6 +1,6 @@
 #ifndef NO
 #define NO
-class NO
+class No
 {
     private:
         int chave;
