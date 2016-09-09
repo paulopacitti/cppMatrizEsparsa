@@ -17,7 +17,7 @@ class Lista
 
         bool existe(No* n);
         No* getByIndex(int i) throw();
-        No* getByChave(int c) throw();
+        No* getByChave(int c);
 
 };
 #endif // ELEMENTO

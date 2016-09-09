@@ -59,7 +59,6 @@ void Lista::incluir(No* n)
                     aux = aux->getProx();
                 }
             }
-
             aux2 = aux->getProx();
             aux->setProx(n);
             aux->getProx()->setProx(aux2);
@@ -86,12 +85,14 @@ void Lista::excluir(No* n)
 
 bool Lista::existe(No* n)
 {
-    for(int i=0; i < tamanho; i++)
+    if(tamanho != 0)
     {
-        if(this->getByIndex(i)->compareTo(n) == 0)
-            return true;
+         for(int i=0; i < tamanho; i++)
+        {
+            if(this->getByIndex(i)->compareTo(n) == 0)
+                return true;
+        }
     }
-
     return false;
 }
 
@@ -110,15 +111,15 @@ No* Lista::getByIndex(int i) throw()
     }
 }
 
-No* Lista::getByChave(int c) throw()
+No* Lista::getByChave(int c)
 {
-    for(int i=0; i < tamanho; i++)
+    for(int i=0; i < (tamanho-1); i++)
     {
         if(this->getByIndex(i)->getChave() == c)
             return this->getByIndex(i);
     }
-    throw "Chave não existe";
-
+    No* retorno = new No(-1,-1);
+    return retorno;
 }
 
 

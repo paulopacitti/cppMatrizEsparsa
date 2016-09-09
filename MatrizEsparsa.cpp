@@ -28,7 +28,7 @@ void MatrizEsparsa::incluir(int l, int c, int v) throw()
     if(v != valorComum && validaLinhaColuna(l, c))
     {
         No* novaColuna = new No(c, v);
-        if(!this->vetLinhas[l]->existe(novaColuna))
+        if(!this->vetLinhas[l-1]->existe(novaColuna))
         {
             if(vetLinhas[l-1] == NULL)
             {
@@ -67,17 +67,18 @@ bool MatrizEsparsa::validaLinhaColuna(int l, int c)
 
 std::ostream& operator<< (std::ostream& o, MatrizEsparsa m)
 {
-    for(int i=0; i < m.nLinhas -1; i++)
+    for(int i=0; i < m.nLinhas; i++)
     {
-        o << "/n";
-        for(int j = 0; j < m.nColunas -1; i++)
+        o << "\n";
+        for(int j = 0; j < (m.nColunas -1); j++)
         {
-            if(m.vetLinhas[i]->getByChave(j)== NULL)
+            if(m.vetLinhas[i] == NULL || m.vetLinhas[i]->getByChave(j)->getChave() == -1)
             {
-                o << " " + m.valorComum;
+                o << " ";
+                o << m.valorComum;
             }
             else
-                o << " " + m.vetLinhas[i]->getByChave(j)->getValor();
+                o << " " + m.vetLinhas[i]->getByIndex(j)->getValor();
         }
     }
     return o;
