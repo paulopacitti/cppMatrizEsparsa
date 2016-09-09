@@ -27,31 +27,31 @@
 1473381660 source:c:\users\user\documents\github\cppmatrizesparsa\no.cpp
 	"No.h"
 
-1473437975 source:c:\users\u14191\documents\github\cppmatrizesparsa\main.cpp
+1473442622 source:c:\users\u14191\documents\github\cppmatrizesparsa\main.cpp
 	<iostream>
 	"MatrizEsparsa.h"
 
-1473422039 c:\users\u14191\documents\github\cppmatrizesparsa\matrizesparsa.h
+1473440218 c:\users\u14191\documents\github\cppmatrizesparsa\matrizesparsa.h
 	<stdio.h>
 	"Lista.h"
 	<ostream>
 
-1473434850 c:\users\u14191\documents\github\cppmatrizesparsa\lista.h
+1473440218 c:\users\u14191\documents\github\cppmatrizesparsa\lista.h
 	"No.h"
 
-1473422039 c:\users\u14191\documents\github\cppmatrizesparsa\no.h
+1473440218 c:\users\u14191\documents\github\cppmatrizesparsa\no.h
 
-1473438284 source:c:\users\u14191\documents\github\cppmatrizesparsa\matrizesparsa.cpp
+1473442722 source:c:\users\u14191\documents\github\cppmatrizesparsa\matrizesparsa.cpp
 	"MatrizEsparsa.h"
 	"Lista.h"
 	"No.h"
 	<iostream>
 	<ostream>
 
-1473422039 source:c:\users\u14191\documents\github\cppmatrizesparsa\no.cpp
+1473440218 source:c:\users\u14191\documents\github\cppmatrizesparsa\no.cpp
 	"No.h"
 
-1473438574 source:c:\users\u14191\documents\github\cppmatrizesparsa\lista.cpp
+1473441273 source:c:\users\u14191\documents\github\cppmatrizesparsa\lista.cpp
 	"Lista.h"
 	"No.h"
 

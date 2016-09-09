@@ -16,8 +16,8 @@ int main()
 
     MatrizEsparsa m(l, c, v);
     m.incluir(2,2,4);
-    m.incluir(3,2,5);
-    m.incluir(1,1,6);
+  //  m.incluir(3,2,5);
+   // m.incluir(1,1,6);
     cout << "--------------------- \n ";
     cout << m;
 

@@ -85,9 +85,9 @@ void Lista::excluir(No* n)
 
 bool Lista::existe(No* n)
 {
-    if(tamanho != 0)
+    if(this->tamanho != 0)
     {
-         for(int i=0; i < tamanho; i++)
+         for(int i=0; i < this->tamanho; i++)
         {
             if(this->getByIndex(i)->compareTo(n) == 0)
                 return true;
