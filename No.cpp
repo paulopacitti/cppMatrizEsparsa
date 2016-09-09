@@ -1,29 +1,27 @@
 #include "No.h"
 
-No:No(int c, int v)
+No::No(int c, int v)
 {
     this->chave = c;
     this->valor = v;
-    this->prox = NULL;
 }
 
-No:~No()
+No::~No()
 {
-    this->prox = NULL;
     delete this->prox;
 }
 
-int No::getChave()
+int No::getChave() const
 {
     return this->chave;
 }
 
-int No::setChave(int c)
+void No::setChave(int c)
 {
     this->chave = c;
 }
 
-int No::getValor()
+int No::getValor() const
 {
     return this->valor;
 }

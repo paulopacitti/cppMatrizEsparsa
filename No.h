@@ -18,6 +18,7 @@ class No
         void setProx(No* p);
 
         int compareTo(No* n);
+        char* toString();
 
 };
 #endif // NO

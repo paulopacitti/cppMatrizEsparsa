@@ -1,5 +1,8 @@
 #ifndef MATRIZESPARSA
 #define MATRIZESPARSA
+#include <stdio.h>
+#include "Lista.h"
+#include <ostream>
 
 
 class MatrizEsparsa
@@ -8,20 +11,20 @@ class MatrizEsparsa
         int nLinhas;
         int nColunas;
         int valorComum;
-        Lista[] vetLinhas;
+        Lista** vetLinhas;
 
         bool validaLinhaColuna(int l, int v);
 
     public:
-        MatrizEsparsa(int l, int c, int v) const;
+        MatrizEsparsa(int l, int c, int v);
         virtual ~MatrizEsparsa();
-        void incluir(int l, int c, int v) throw():
+        void incluir(int l, int c, int v) throw();
         void excluir(int l, int c, int v) throw();
-        friend OStream& operator<< (OStream& o, MatrizEsparsa m);
+        friend std::ostream& operator<< (std::ostream& o, MatrizEsparsa m);
 
 };
+extern std::ostream& operator<< (std::ostream& o, MatrizEsparsa m);
 
-extern OStream& operator<< (OStream& o, MatrizEsparsa m);
 
 #endif
 

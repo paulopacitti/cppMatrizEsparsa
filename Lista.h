@@ -8,6 +8,7 @@ class Lista
         No* primeiro;
 
     public:
+        Lista();
         Lista(No* p);
         virtual ~Lista();
         void incluir(No* n);
@@ -16,6 +17,7 @@ class Lista
 
         bool existe(No* n);
         No* getByIndex(int i) throw();
+        No* getByChave(int c) throw();
 
 };
 #endif // ELEMENTO

@@ -1,6 +1,11 @@
 #include "Lista.h"
 #include "No.h"
 
+Lista::Lista()
+{
+    this->tamanho = 0;
+}
+
 Lista::Lista(No* p)
 {
     this->primeiro = p;
@@ -104,5 +109,19 @@ No* Lista::getByIndex(int i) throw()
          return aux;
     }
 }
+
+No* Lista::getByChave(int c) throw()
+{
+    for(int i=0; i < tamanho; i++)
+    {
+        if(this->getByIndex(i)->getChave() == c)
+            return this->getByIndex(i);
+    }
+    throw "Chave não existe";
+
+}
+
+
+
 
 
