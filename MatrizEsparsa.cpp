@@ -12,7 +12,7 @@ MatrizEsparsa:: MatrizEsparsa(int l, int c, int v)
 
     this->vetLinhas = new Lista*[l];
 
-    for(int i=0; i<4; i++)
+    for(int i=0; i<l; i++)
     {
         this->vetLinhas[i] = NULL;
     }
@@ -20,7 +20,12 @@ MatrizEsparsa:: MatrizEsparsa(int l, int c, int v)
 
 MatrizEsparsa::~MatrizEsparsa()
 {
+    for(int i=0; i<nLinhas; i++)
+    {
+        this->vetLinhas[i] = NULL;
+    }
 
+    delete this->vetLinhas;
 }
 
 void MatrizEsparsa::incluir(int l, int c, int v) throw()
@@ -31,7 +36,6 @@ void MatrizEsparsa::incluir(int l, int c, int v) throw()
         if(vetLinhas[l-1] == NULL)
         {
             Lista* novaLinha = new Lista(novaColuna);
-            novaLinha->incluir(novaColuna);
             vetLinhas[l-1] = novaLinha;
         }
         else
@@ -73,13 +77,16 @@ std::ostream& operator<< (std::ostream& o, MatrizEsparsa m)
         o << "\n";
         for(int j = 0; j < m.nColunas; j++)
         {
-            if(m.vetLinhas[i] == NULL || m.vetLinhas[i]->getByChave(j)->getChave() == -1)
+            if(m.vetLinhas[i] == NULL || m.vetLinhas[i]->getByChave(j+1)->getChave() == -1)
             {
                 o << " ";
                 o << m.valorComum;
             }
             else
-                o << " " + m.vetLinhas[i]->getByIndex(j)->getValor();
+            {
+                o << " " ;
+                o << (int)(m.vetLinhas[i]->getByIndex(j-1)->getValor());
+            }
         }
     }
     return o;

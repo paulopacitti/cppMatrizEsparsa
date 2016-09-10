@@ -11,7 +11,7 @@ class Lista
         Lista();
         Lista(No* p);
         virtual ~Lista();
-        void incluir(No* n);
+        void incluir(No* n) throw();
         void excluir(No* n);
         int getTamanho();
 

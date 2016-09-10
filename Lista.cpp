@@ -9,7 +9,7 @@ Lista::Lista()
 Lista::Lista(No* p)
 {
     this->primeiro = p;
-    tamanho = 1;
+    this->tamanho = 1;
 }
 
 Lista::~Lista()
@@ -24,46 +24,58 @@ Lista::~Lista()
     }
 }
 
-void Lista::incluir(No* n)
+void Lista::incluir(No* n) throw()
 {
     bool achou = false;
     int chave = 0;
     No* aux = this->primeiro;
     No* aux2;
 
-    if(this->getByIndex(0)->compareTo(n) == -1)
+    if(this->existe(n))
+        throw "Nó já existe na lista";
+    if(tamanho == 0)
     {
-        aux = this->primeiro;
         this->primeiro = n;
-        this->primeiro->setProx(aux);
-        tamanho++;
-        return;
+        this->tamanho = 1;
     }
     else
     {
-        if(this->getByIndex(tamanho-1)->compareTo(n) == -1)
+        if(this->getByIndex(0)->compareTo(n) == -1)
         {
-            this->getByIndex(tamanho-1)->setProx(n);
+            aux = this->primeiro;
+            this->primeiro = n;
+            this->primeiro->setProx(aux);
             tamanho++;
             return;
         }
         else
         {
-            while(!achou)
+            if(this->getByIndex(tamanho-1)->compareTo(n) == -1)
             {
-                if(aux->compareTo(n) == -1)
-                    achou = true;
-                else
-                {
-                    chave = aux->getChave();
-                    aux = aux->getProx();
-                }
+                this->getByIndex(tamanho-1)->setProx(n);
+                tamanho++;
+                return;
             }
-            aux2 = aux->getProx();
-            aux->setProx(n);
-            aux->getProx()->setProx(aux2);
+            else
+            {
+                while(!achou)
+                {
+                    if(aux->compareTo(n) == -1)
+                        achou = true;
+                    else
+                    {
+                        chave = aux->getChave();
+                        aux = aux->getProx();
+                    }
+                }
+                aux2 = aux->getProx();
+                aux->setProx(n);
+                aux->getProx()->setProx(aux2);
+            }
         }
     }
+
+
 }
 
 void Lista::excluir(No* n)
@@ -101,7 +113,7 @@ No* Lista::getByIndex(int i) throw()
     No* aux;
     aux = this->primeiro;
 
-    if((i+1) > tamanho)
+    if((i) > tamanho)
         throw "Index não existe na lista";
     else
     {
@@ -113,7 +125,7 @@ No* Lista::getByIndex(int i) throw()
 
 No* Lista::getByChave(int c)
 {
-    for(int i=0; i < (tamanho-1); i++)
+    for(int i=0; i < (tamanho); i++)
     {
         if(this->getByIndex(i)->getChave() == c)
             return this->getByIndex(i);
