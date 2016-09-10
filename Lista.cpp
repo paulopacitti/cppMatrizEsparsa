@@ -1,5 +1,6 @@
 #include "Lista.h"
 #include "No.h"
+#include <cstddef>
 
 Lista::Lista()
 {
@@ -26,59 +27,29 @@ Lista::~Lista()
 
 void Lista::incluir(No* n) throw()
 {
-    bool achou = false;
-    int chave = 0;
-    No* aux = this->primeiro;
-    No* aux2;
 
-    if(this->existe(n))
-        throw "Nó já existe na lista";
-    if(tamanho == 0)
+    No* atual;
+    /* Special case for the head end */
+    if (this->tamanho == 0 || this->primeiro->compareTo(n) == 1)
     {
+        n->setProx(this->primeiro);
         this->primeiro = n;
-        this->tamanho = 1;
     }
     else
     {
-        if(this->getByIndex(0)->compareTo(n) == -1)
+        /* Locate the node before the point of insertion */
+        atual = this->primeiro;
+        while(atual->getProx() != NULL && atual->getProx()->compareTo(n) == -1)
         {
-            aux = this->primeiro;
-            this->primeiro = n;
-            this->primeiro->setProx(aux);
-            tamanho++;
-            return;
+            atual = atual->getProx();
         }
-        else
-        {
-            if(this->getByIndex(tamanho-1)->compareTo(n) == -1)
-            {
-                this->getByIndex(tamanho-1)->setProx(n);
-                tamanho++;
-                return;
-            }
-            else
-            {
-                while(!achou)
-                {
-                    if(aux->compareTo(n) == -1)
-                        achou = true;
-                    else
-                    {
-                        chave = aux->getChave();
-                        aux = aux->getProx();
-                    }
-                }
-                aux2 = aux->getProx();
-                aux->setProx(n);
-                aux->getProx()->setProx(aux2);
-            }
-        }
+
+        n->setProx(atual->getProx());
+        atual->setProx(n);
     }
-
-
 }
 
-void Lista::excluir(No* n)
+void Lista::excluir(No* n) throw()
 {
     No* aux;
     if(this->existe(n))
@@ -93,6 +64,8 @@ void Lista::excluir(No* n)
             }
         }
     }
+    else
+        throw "Nó não existe na lista";
 }
 
 bool Lista::existe(No* n)
@@ -108,6 +81,7 @@ bool Lista::existe(No* n)
     return false;
 }
 
+
 No* Lista::getByIndex(int i) throw()
 {
     No* aux;
@@ -117,10 +91,16 @@ No* Lista::getByIndex(int i) throw()
         throw "Index não existe na lista";
     else
     {
-         for(int j=0; j < i; i++)
-            aux = aux->getProx();
-         return aux;
+        if(i == 0)
+            return this->primeiro;
+        else
+        {
+            for(int j=0; j < i; i++)
+                aux = aux->getProx();
+            return aux;
+        }
     }
+
 }
 
 No* Lista::getByChave(int c)

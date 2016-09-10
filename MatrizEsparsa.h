@@ -16,7 +16,7 @@ class MatrizEsparsa
         bool validaLinhaColuna(int l, int v);
 
     public:
-        MatrizEsparsa(int l, int c, int v);
+        MatrizEsparsa(int l, int c, int v) throw();
         virtual ~MatrizEsparsa();
         void incluir(int l, int c, int v) throw();
         void excluir(int l, int c, int v) throw();

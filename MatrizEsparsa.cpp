@@ -4,12 +4,14 @@
 #include <iostream>
 #include <ostream>
 
-MatrizEsparsa:: MatrizEsparsa(int l, int c, int v)
+MatrizEsparsa:: MatrizEsparsa(int l, int c, int v) throw()
 {
     this->nLinhas = l;
     this->nColunas = c;
     this->valorComum = v;
 
+    if(l == 0 || c == 0)
+        throw "Matriz Inválida";
     this->vetLinhas = new Lista*[l];
 
     for(int i=0; i<l; i++)
@@ -54,8 +56,7 @@ void MatrizEsparsa::excluir(int l, int c, int v) throw()
     if(v != valorComum && validaLinhaColuna(l, c))
     {
         No* novaColuna = new No(c, v);
-        if(vetLinhas[l-1]->existe(novaColuna))
-            vetLinhas[l-1]->excluir(novaColuna);
+        vetLinhas[l-1]->excluir(novaColuna);
     }
     else
         throw "Elemento não existe na matriz";

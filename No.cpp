@@ -1,9 +1,11 @@
 #include "No.h"
+#include <cstddef>
 
 No::No(int c, int v)
 {
     this->chave = c;
     this->valor = v;
+    this->prox = NULL;
 }
 
 No::~No()

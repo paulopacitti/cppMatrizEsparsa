@@ -12,7 +12,7 @@ class Lista
         Lista(No* p);
         virtual ~Lista();
         void incluir(No* n) throw();
-        void excluir(No* n);
+        void excluir(No* n) throw();
         int getTamanho();
 
         bool existe(No* n);
