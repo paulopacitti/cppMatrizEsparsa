@@ -21,6 +21,8 @@ int main()
         m.incluir(2,1,6);
         m.incluir(3,2,5);
         m.incluir(1,1,6);
+        m.incluir(3,3,5);
+
         cout << "--------------------- \n ";
         cout << m;
         m.excluir(1,1,6);

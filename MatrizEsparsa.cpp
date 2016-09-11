@@ -45,7 +45,6 @@ void MatrizEsparsa::incluir(int l, int c, int v) throw()
             if(this->vetLinhas[l-1]->existe(novaColuna) == false)
                 vetLinhas[l-1]->incluir(novaColuna);
         }
-
     }
     else
         throw "Elemento já existe ou não compreende as dimensões da matriz";

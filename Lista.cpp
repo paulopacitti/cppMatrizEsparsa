@@ -34,6 +34,7 @@ void Lista::incluir(No* n) throw()
     {
         n->setProx(this->primeiro);
         this->primeiro = n;
+        this->tamanho++;
     }
     else
     {
@@ -46,33 +47,64 @@ void Lista::incluir(No* n) throw()
 
         n->setProx(atual->getProx());
         atual->setProx(n);
+        this->tamanho++;
     }
 }
 
 void Lista::excluir(No* n) throw()
 {
-    No* aux;
-    if(this->existe(n))
+
+    if(primeiro->compareTo(n) == 0)
     {
-        for(int i=0; i < tamanho; i++)
+        if(this->primeiro->getProx() == NULL)
         {
-            if(this->getByIndex(i)->compareTo(n) == 0)
-            {
-                aux = this->getByIndex(i)->getProx();
-                this->getByIndex(i)->~No();
-                this->getByIndex(i-1)->setProx(aux);
-            }
+            this->~Lista();
+            return;
         }
+
+        /* Copy the data of next node to head */
+        this->primeiro = this->primeiro->getProx();
+
+        // store address of next node
+        n = this->primeiro->getProx();
+
+        // Remove the link of next node
+        this->primeiro->setProx(this->primeiro->getProx()->getProx());
+        // free memory
+        n->~No();
+
+        return;
     }
-    else
-        throw "Nó não existe na lista";
+
+
+    // When not first node, follow the normal deletion process
+
+    // find the previous node
+    No* aux = this->primeiro;
+    while(aux->getProx() != NULL && aux->getProx() != n)
+        aux = aux->getProx();
+
+    // Check if node really exists in Linked List
+    if(aux->getProx() == NULL)
+    {
+        throw "Elemento não existe na matriz";
+        return;
+    }
+
+    // Remove node from Linked List
+    aux->setProx(aux->getProx()->getProx());
+
+    // Free memory
+    n->~No();
+
+    return;
 }
 
 bool Lista::existe(No* n)
 {
     if(this->tamanho != 0)
     {
-         for(int i=0; i < this->tamanho; i++)
+         for(int i=0; i < this->tamanho-1; i++)
         {
             if(this->getByIndex(i)->compareTo(n) == 0)
                 return true;
@@ -92,10 +124,10 @@ No* Lista::getByIndex(int i) throw()
     else
     {
         if(i == 0)
-            return this->primeiro;
+            return aux;
         else
         {
-            for(int j=0; j < i; i++)
+            for(int j=0; j < i; j++)
                 aux = aux->getProx();
             return aux;
         }
