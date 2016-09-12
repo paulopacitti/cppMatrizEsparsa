@@ -3,16 +3,19 @@
 class No
 {
     private:
-        int chave;
+        int linha;
+        int coluna;
         int valor;
         No* prox;
     public:
-        No(int c, int v);
+        No(int l, int c, int v);
         virtual ~No();
 
-        int getChave() const;
-        void setChave(int c);
-        int getValor() const;
+        int getLinha();
+        void setLinha(int l);
+        int getColuna() ;
+        void setColuna(int c);
+        int getValor();
         void setValor(int v);
         No* getProx();
         void setProx(No* p);

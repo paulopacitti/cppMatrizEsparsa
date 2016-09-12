@@ -12,55 +12,27 @@ MatrizEsparsa:: MatrizEsparsa(int l, int c, int v) throw()
 
     if(l == 0 || c == 0)
         throw "Matriz Inválida";
-    this->vetLinhas = new Lista*[l];
 
-    for(int i=0; i<l; i++)
-    {
-        this->vetLinhas[i] = NULL;
-    }
+    this->linhas = new Lista();
+
 }
 
 MatrizEsparsa::~MatrizEsparsa()
 {
-    for(int i=0; i<nLinhas; i++)
-    {
-        this->vetLinhas[i] = NULL;
-    }
-
-    delete this->vetLinhas;
+    delete this->linhas;
 }
 
 void MatrizEsparsa::incluir(int l, int c, int v) throw()
 {
     if(v != valorComum && validaLinhaColuna(l, c))
     {
-        No* novaColuna = new No(c, v);
-        if(vetLinhas[l-1] == NULL)
-        {
-            Lista* novaLinha = new Lista(novaColuna);
-            vetLinhas[l-1] = novaLinha;
-        }
-        else
-        {
-            if(this->vetLinhas[l-1]->existe(novaColuna) == false)
-                vetLinhas[l-1]->incluir(novaColuna);
-        }
+        No* novaColuna = new No(l,c, v);
+        this->linhas->incluir(novaColuna);
     }
     else
         throw "Elemento já existe ou não compreende as dimensões da matriz";
 }
 
-void MatrizEsparsa::excluir(int l, int c, int v) throw()
-{
-    if(v != valorComum && validaLinhaColuna(l, c))
-    {
-        No* novaColuna = new No(c, v);
-        vetLinhas[l-1]->excluir(novaColuna);
-    }
-    else
-        throw "Elemento não existe na matriz";
-
-}
 
 bool MatrizEsparsa::validaLinhaColuna(int l, int c)
 {
@@ -72,12 +44,14 @@ bool MatrizEsparsa::validaLinhaColuna(int l, int c)
 
 std::ostream& operator<< (std::ostream& o, MatrizEsparsa m)
 {
+    No* aux;
     for(int i=0; i < (m.nLinhas); i++)
     {
         o << "\n";
         for(int j = 0; j < m.nColunas; j++)
         {
-            if(m.vetLinhas[i] == NULL || m.vetLinhas[i]->getByChave(j+1)->getChave() == -1)
+            aux = new No(i,j,0);
+            if(!m.linhas->existe(aux))
             {
                 o << " ";
                 o << m.valorComum;
@@ -85,7 +59,7 @@ std::ostream& operator<< (std::ostream& o, MatrizEsparsa m)
             else
             {
                 o << " " ;
-                o << (int)(m.vetLinhas[i]->getByIndex(j-1)->getValor());
+                o << (int)(m.linhas->pesquisar(aux)->getValor());
             }
         }
     }

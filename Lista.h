@@ -16,6 +16,7 @@ class Lista
         int getTamanho();
 
         bool existe(No* n);
+        No* pesquisar(No* n);
         No* getByIndex(int i) throw();
         No* getByChave(int c);
 

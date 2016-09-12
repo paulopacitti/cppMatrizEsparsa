@@ -1,9 +1,10 @@
 #include "No.h"
 #include <cstddef>
 
-No::No(int c, int v)
+No::No(int l, int c, int v)
 {
-    this->chave = c;
+    this->linha = l;
+    this->coluna = c;
     this->valor = v;
     this->prox = NULL;
 }
@@ -13,17 +14,27 @@ No::~No()
     delete this->prox;
 }
 
-int No::getChave() const
+int No::getLinha()
 {
-    return this->chave;
+    return this->linha;
 }
 
-void No::setChave(int c)
+void No::setLinha(int l)
 {
-    this->chave = c;
+    this->linha = l;
 }
 
-int No::getValor() const
+int No::getColuna()
+{
+    return this->coluna;
+}
+
+void No::setColuna(int l)
+{
+    this->coluna = l;
+}
+
+int No::getValor()
 {
     return this->valor;
 }
@@ -45,11 +56,15 @@ void No::setProx(No* p)
 
 int No::compareTo(No* n)
 {
-    if(this->getChave() > n->getChave())
+    if(this->getLinha() > n->getLinha())
         return 1;
-    if(this->getChave() < n->getChave())
+    if(this->getLinha() < n->getLinha())
         return -1;
-    else
+    if(this->getLinha() == n->getLinha() && this->getColuna() == n->getColuna())
         return 0;
+    if(this->getLinha() == n->getLinha() && this->getColuna() > n->getColuna())
+        return 1;
+    else
+        return -1;
 }
 

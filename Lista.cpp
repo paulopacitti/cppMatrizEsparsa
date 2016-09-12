@@ -29,16 +29,30 @@ void Lista::incluir(No* n) throw()
 {
 
     No* atual;
-    /* Special case for the head end */
+    if(this->existe(n))
+    {
+        atual = pesquisar(n);
+        atual->setValor(n->getValor());
+        return;
+    }
     if (this->tamanho == 0 || this->primeiro->compareTo(n) == 1)
     {
-        n->setProx(this->primeiro);
-        this->primeiro = n;
-        this->tamanho++;
+        if (this->tamanho == 0)
+        {
+            this->primeiro = n;
+            this->tamanho++;
+            return;
+        }
+        else
+        {
+            n->setProx(this->primeiro);
+            this->primeiro = n;
+            this->tamanho++;
+            return;
+        }
     }
     else
     {
-        /* Locate the node before the point of insertion */
         atual = this->primeiro;
         while(atual->getProx() != NULL && atual->getProx()->compareTo(n) == -1)
         {
@@ -56,9 +70,9 @@ void Lista::excluir(No* n) throw()
 
     if(primeiro->compareTo(n) == 0)
     {
-        if(this->primeiro->getProx() == NULL)
+        if(primeiro->getProx() == NULL)
         {
-            this->~Lista();
+            //this->~Lista();
             return;
         }
 
@@ -102,48 +116,36 @@ void Lista::excluir(No* n) throw()
 
 bool Lista::existe(No* n)
 {
+    No* aux = this->primeiro;
     if(this->tamanho != 0)
     {
-         for(int i=0; i < this->tamanho-1; i++)
+        for(int i=0; i < this->tamanho-1; i++)
         {
-            if(this->getByIndex(i)->compareTo(n) == 0)
+            if(aux->compareTo(n) == 0)
                 return true;
+            else
+                aux = aux->getProx();
         }
+
     }
     return false;
 }
 
-
-No* Lista::getByIndex(int i) throw()
+No* Lista::pesquisar(No* n)
 {
-    No* aux;
-    aux = this->primeiro;
-
-    if((i) > tamanho)
-        throw "Index não existe na lista";
-    else
+    bool achou = false;
+    No* aux = this->primeiro;
+    if(this->existe(n))
     {
-        if(i == 0)
-            return aux;
-        else
+        while(!achou)
         {
-            for(int j=0; j < i; j++)
+            if(aux->compareTo(n) == 0)
+                achou = true;
+            else
                 aux = aux->getProx();
-            return aux;
         }
+        return aux;
     }
-
-}
-
-No* Lista::getByChave(int c)
-{
-    for(int i=0; i < (tamanho); i++)
-    {
-        if(this->getByIndex(i)->getChave() == c)
-            return this->getByIndex(i);
-    }
-    No* retorno = new No(-1,-1);
-    return retorno;
 }
 
 

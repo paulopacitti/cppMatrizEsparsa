@@ -25,8 +25,8 @@ int main()
 
         cout << "--------------------- \n ";
         cout << m;
-        m.excluir(1,1,6);
-        cout << m;
+       // m.incluir(1,1,3);
+       // cout << m;
     }
     catch(exception& e)
     {

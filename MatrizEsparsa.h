@@ -11,7 +11,7 @@ class MatrizEsparsa
         int nLinhas;
         int nColunas;
         int valorComum;
-        Lista** vetLinhas;
+        Lista* linhas;
 
         bool validaLinhaColuna(int l, int v);
 
@@ -19,7 +19,6 @@ class MatrizEsparsa
         MatrizEsparsa(int l, int c, int v) throw();
         virtual ~MatrizEsparsa();
         void incluir(int l, int c, int v) throw();
-        void excluir(int l, int c, int v) throw();
         friend std::ostream& operator<< (std::ostream& o, MatrizEsparsa m);
 
 };
