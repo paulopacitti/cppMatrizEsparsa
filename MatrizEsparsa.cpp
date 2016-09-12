@@ -19,18 +19,22 @@ MatrizEsparsa:: MatrizEsparsa(int l, int c, int v) throw()
 
 MatrizEsparsa::~MatrizEsparsa()
 {
-    delete this->linhas;
+    this->linhas = NULL;
 }
 
 void MatrizEsparsa::incluir(int l, int c, int v) throw()
 {
+    No* novaColuna = new No(l,c, v);
     if(v != valorComum && validaLinhaColuna(l, c))
-    {
-        No* novaColuna = new No(l,c, v);
         this->linhas->incluir(novaColuna);
-    }
     else
-        throw "Elemento já existe ou não compreende as dimensões da matriz";
+    {
+        if(this->linhas->existe(novaColuna))
+            this->linhas->incluir(novaColuna);
+        else
+            throw "Elemento já existe ou não compreende as dimensões da matriz";
+    }
+
 }
 
 
@@ -45,10 +49,10 @@ bool MatrizEsparsa::validaLinhaColuna(int l, int c)
 std::ostream& operator<< (std::ostream& o, MatrizEsparsa m)
 {
     No* aux;
-    for(int i=0; i < (m.nLinhas); i++)
+    for(int i=1; i <= (m.nLinhas); i++)
     {
         o << "\n";
-        for(int j = 0; j < m.nColunas; j++)
+        for(int j = 1; j <= m.nColunas; j++)
         {
             aux = new No(i,j,0);
             if(!m.linhas->existe(aux))
@@ -63,7 +67,7 @@ std::ostream& operator<< (std::ostream& o, MatrizEsparsa m)
             }
         }
     }
-    return o;
+   // return o;
 }
 
 

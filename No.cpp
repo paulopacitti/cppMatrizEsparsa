@@ -11,7 +11,10 @@ No::No(int l, int c, int v)
 
 No::~No()
 {
-    delete this->prox;
+   this->prox = NULL;
+   this->linha = NULL;
+    this->coluna = NULL;
+    this->valor = NULL;
 }
 
 int No::getLinha()

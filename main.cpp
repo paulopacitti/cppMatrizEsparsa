@@ -14,28 +14,15 @@ int main()
     cout << "Digite o valor comum: \n";
     cin >> v;
 
-    try
-    {
         MatrizEsparsa m(l, c, v);
         m.incluir(2,2,4);
         m.incluir(2,1,6);
         m.incluir(3,2,5);
         m.incluir(1,1,6);
         m.incluir(3,3,5);
+        m.incluir(1,1,0);
 
         cout << "--------------------- \n ";
         cout << m;
-       // m.incluir(1,1,3);
-       // cout << m;
-    }
-    catch(exception& e)
-    {
-        cout << "Deu ruim";
-    }
-
-
-
-
-
 
 }

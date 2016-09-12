@@ -15,14 +15,8 @@ Lista::Lista(No* p)
 
 Lista::~Lista()
 {
-    No* atual = this->primeiro;
-    No* aux;
-    for(int i=0; i< tamanho; i++)
-    {
-        aux = atual->getProx();
-        atual->~No();
-        atual = aux;
-    }
+    this->primeiro = NULL;
+    this->tamanho = 0;
 }
 
 void Lista::incluir(No* n) throw()
@@ -31,8 +25,14 @@ void Lista::incluir(No* n) throw()
     No* atual;
     if(this->existe(n))
     {
-        atual = pesquisar(n);
-        atual->setValor(n->getValor());
+        if(n->getValor() == 0)
+            this->excluir(n);
+        else
+        {
+            atual = pesquisar(n);
+            atual->setValor(n->getValor());
+        }
+
         return;
     }
     if (this->tamanho == 0 || this->primeiro->compareTo(n) == 1)
@@ -65,55 +65,6 @@ void Lista::incluir(No* n) throw()
     }
 }
 
-void Lista::excluir(No* n) throw()
-{
-
-    if(primeiro->compareTo(n) == 0)
-    {
-        if(primeiro->getProx() == NULL)
-        {
-            //this->~Lista();
-            return;
-        }
-
-        /* Copy the data of next node to head */
-        this->primeiro = this->primeiro->getProx();
-
-        // store address of next node
-        n = this->primeiro->getProx();
-
-        // Remove the link of next node
-        this->primeiro->setProx(this->primeiro->getProx()->getProx());
-        // free memory
-        n->~No();
-
-        return;
-    }
-
-
-    // When not first node, follow the normal deletion process
-
-    // find the previous node
-    No* aux = this->primeiro;
-    while(aux->getProx() != NULL && aux->getProx() != n)
-        aux = aux->getProx();
-
-    // Check if node really exists in Linked List
-    if(aux->getProx() == NULL)
-    {
-        throw "Elemento não existe na matriz";
-        return;
-    }
-
-    // Remove node from Linked List
-    aux->setProx(aux->getProx()->getProx());
-
-    // Free memory
-    n->~No();
-
-    return;
-}
-
 bool Lista::existe(No* n)
 {
     No* aux = this->primeiro;
@@ -129,6 +80,37 @@ bool Lista::existe(No* n)
 
     }
     return false;
+}
+
+void Lista::excluir(No* n)
+{
+    if(this->primeiro->compareTo(n) == 0)
+    {
+        if(this->primeiro->getProx() == NULL)
+        {
+            this->primeiro == NULL;
+            return;
+        }
+
+        /* Copy the data of next node to head */
+        n = this->primeiro;
+        this->primeiro = this->primeiro->getProx();
+        // free memory
+        delete n;
+        return;
+    }
+    No* atual = this->primeiro;
+    while(atual->getProx() != NULL && atual->getProx() != n)
+        atual = atual->getProx();
+
+    if(atual->getProx() == NULL)
+        return;
+
+    // Remove node from Linked List
+    atual->setProx(atual->getProx()->getProx());
+    delete n;
+
+    return;
 }
 
 No* Lista::pesquisar(No* n)
